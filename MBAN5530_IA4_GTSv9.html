@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MBAN 5530 IA4 · Obermeyer et al. (2019) Case Discussion</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/white.min.css">
+
+<style>
+  :root {
+    --bg:       #fafaf7;
+    --ink:      #1a1a1a;
+    --muted:    #5a5a5a;
+    --soft:     #8c8c8c;
+    --rule:     #d8d4cb;
+    --rule-2:   #ebe7dd;
+    --teal:     #0d7377;
+    --teal-bg:  #e3efef;
+    --coral:    #c44536;
+    --coral-bg: #f4ddd9;
+    --tier-a-fg: #1f5132;
+    --tier-a-bg: #d6e8db;
+    --tier-b-fg: #7a5c00;
+    --tier-b-bg: #f4ebcd;
+  }
+
+  html, body { background: var(--bg); }
+
+  .reveal {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+
+  .reveal .slides {
+    text-align: left;
+  }
+
+  .reveal .slides section {
+    text-align: left;
+    padding: 0 50px;
+  }
+
+  /* ───────── Hierarchy ───────── */
+
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+    font-family: inherit;
+    color: var(--ink);
+    text-transform: none;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.4em 0;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+  .reveal h1 { font-size: 2.6em; }
+  .reveal h2 { font-size: 1.6em; }
+  .reveal h3 { font-size: 1.15em; color: var(--muted); font-weight: 500; }
+
+  .reveal p, .reveal li { color: var(--ink); line-height: 1.45; }
+  .reveal small, .reveal .small { color: var(--soft); font-size: 0.55em; line-height: 1.4; }
+
+  .reveal em { font-style: italic; }
+  .reveal strong { font-weight: 600; }
+
+  /* ───────── Eyebrow (small label above headings) ───────── */
+
+  .eyebrow {
+    font-size: 0.42em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 1em;
+  }
+  [data-section="Q5"] .eyebrow { color: var(--coral); }
+
+  /* ───────── Tier badges ───────── */
+
+  .tier {
+    display: inline-block;
+    font-size: 0.38em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.25em 0.65em 0.2em;
+    border-radius: 3px;
+    font-weight: 700;
+    vertical-align: 0.2em;
+    line-height: 1;
+    margin-left: 0.4em;
+  }
+  .tier-a { background: var(--tier-a-bg); color: var(--tier-a-fg); }
+  .tier-b { background: var(--tier-b-bg); color: var(--tier-b-fg); }
+  .tier-inline { font-size: 0.6em; vertical-align: 0.15em; margin-left: 0.5em; }
+
+  /* ───────── Section label (fixed corner) ───────── */
+
+  .section-label {
+    position: fixed;
+    top: 18px;
+    left: 22px;
+    font-size: 20px;
+    letter-spacing: 0.22em;
+    color: var(--muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 30;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .section-label .dot {
+    display: inline-block;
+    width: 9px; height: 9px;
+    background: var(--teal);
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: 1px;
+  }
+  .section-label.q5 .dot { background: var(--coral); }
+
+  /* Reveal's own controls / progress */
+  .reveal .slide-number {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: transparent;
+    color: var(--soft);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    bottom: 12px;
+    right: 16px;
+    padding: 0;
+  }
+  .reveal .progress {
+    color: var(--teal);
+    height: 2px;
+  }
+  body.q5 .reveal .progress { color: var(--coral); }
+
+  /* ───────── Case in one breath (Focal 0.1) ───────── */
+
+  .breath-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .breath-list li {
+    font-size: 1.0em;
+    line-height: 1.40;
+    padding: 0.35em 0;
+    border-bottom: 1px solid var(--rule-2);
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .breath-list li:first-child {
+    font-weight: 600;
+    font-size: 1.2em;
+    border-bottom-color: var(--rule);
+  }
+  .breath-list li:last-child {
+    border-bottom: none;
+    color: var(--coral);
+    font-weight: 500;
+  }
+
+  /* ───────── Three figures (Focal 0.2) ───────── */
+
+  .figure-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 0.5em;
+  }
+  .figure-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--teal);
+    padding: 16px 16px 14px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  .figure-card .figure-number {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: var(--teal);
+    line-height: 1.1;
+    margin-bottom: 2px;
+    letter-spacing: -0.02em;
+  }
+  .figure-card .figure-name {
+    font-size: 0.5em;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .figure-card .figure-is, .figure-card .figure-isnot {
+    font-size: 0.42em;
+    line-height: 1.45;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .figure-card .figure-isnot { color: var(--coral); }
+  .figure-card .figure-is strong, .figure-card .figure-isnot strong {
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 3px;
+    color: var(--muted);
+  }
+  .figure-card .figure-isnot strong { color: var(--coral); opacity: 0.8; }
+  .figure-card .figure-source {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule-2);
+    font-size: 0.32em;
+    color: var(--soft);
+    letter-spacing: 0.04em;
+  }
+
+  /* ───────── Block-quote treatment (case frame, Q1 close, Q5 close) ───────── */
+
+  .frame-block {
+    max-width: 980px;
+    margin: 0;
+    font-size: 0.92em;
+    line-height: 1.55;
+    color: var(--ink);
+    padding: 0 0 0 28px;
+    border-left: 3px solid var(--teal);
+    text-align: left;
+  }
+  [data-section="Q5"] .frame-block { border-left-color: var(--coral); }
+  .frame-block p { margin-bottom: 0.6em; }
+  .frame-block .attribution {
+    margin-top: 0.8em;
+    font-size: 0.55em;
+    color: var(--soft);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ───────── Stakeholder slide layout ───────── */
+
+  .stakeholder-num {
+    font-size: 0.65em;
+    color: var(--soft);
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .stakeholder-title { font-size: 2.2em; line-height: 1.1; margin-bottom: 8px; }
+  .stakeholder-sub {
+    font-size: 0.85em;
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+  .stakeholder-body {
+    font-size: 0.78em;
+    line-height: 1.55;
+    max-width: 1000px;
+  }
+  .stakeholder-body p { margin: 0 0 0.6em 0; }
+  .stakeholder-body .closer {
+    margin-top: 1em;
+    padding-top: 0.8em;
+    border-top: 1px solid var(--rule-2);
+    font-weight: 500;
+    color: var(--teal);
+  }
+  .stakeholder-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.4em 0;
+  }
+  .stakeholder-body ul li {
+    padding: 0.18em 0 0.18em 16px;
+    position: relative;
+    font-size: 0.95em;
+  }
+  .stakeholder-body ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 1px;
+    background: var(--teal);
+  }
+  .stakeholder-body .biomarker-list li::before { background: var(--coral); }
+
+  /* ───────── Big inline stat (e.g., Q1.6) ───────── */
+
+  .pulled-stat {
+    background: white;
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--coral);
+    padding: 16px 22px;
+    margin: 18px 0 22px;
+    display: inline-block;
+  }
+  .pulled-stat .num {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .pulled-stat .label {
+    font-size: 0.5em;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ───────── Climax slide (Q1.8) ───────── */
+
+  .climax-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 24px 36px;
+    margin-top: 8px;
+    font-size: 0.72em;
+    line-height: 1.5;
+    max-width: 1080px;
+  }
+  .climax-grid .item {
+    padding-left: 18px;
+    border-left: 2px solid var(--rule);
+  }
+  .climax-grid .item .item-head {
+    font-size: 0.62em;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .climax-finale {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1.5px solid var(--rule);
+    font-size: 0.95em;
+    color: var(--ink);
+  }
+  .climax-finale .big {
+    font-size: 1.55em;
+    font-weight: 700;
+    color: var(--teal);
+    margin-right: 0.3em;
+    letter-spacing: -0.02em;
+  }
+
+  /* ───────── Q5.2 arrow / pipeline ───────── */
+
+  .pipeline {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    margin: 30px 0 28px;
+    gap: 0;
+  }
+  .pipeline .step {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 22px 26px;
+    flex: 1;
+    max-width: 280px;
+    text-align: center;
+    position: relative;
+  }
+  .pipeline .step .step-num {
+    font-size: 0.42em;
+    color: var(--coral);
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .pipeline .step .step-name {
+    font-size: 0.92em;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .pipeline .arrow {
+    display: flex;
+    align-items: center;
+    color: var(--coral);
+    font-size: 1.6em;
+    padding: 0 14px;
+    font-weight: 300;
+  }
+
+  /* ───────── Q5.3 two-column gap ───────── */
+
+  .gap-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin: 18px 0 26px;
+  }
+  .gap-col {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 22px;
+    border-radius: 4px;
+  }
+  .gap-col h3 {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--coral);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .gap-col .headline {
+    font-size: 1.05em;
+    font-weight: 600;
+    margin: 0 0 12px;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .gap-col .detail {
+    font-size: 0.6em;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  .gap-summary {
+    text-align: left;
+    font-size: 0.82em;
+    color: var(--ink);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .outside-law {
+    border-top: 1.5px solid var(--rule);
+    padding-top: 16px;
+    margin-top: 8px;
+    font-size: 0.62em;
+    line-height: 1.5;
+  }
+  .outside-law .head {
+    font-size: 0.95em;
+    color: var(--coral);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ───────── Q5.4 compromise ───────── */
+
+  .anchor-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin: 12px 0 22px;
+  }
+  .anchor {
+    background: white;
+    padding: 18px 22px;
+    border-left: 3px solid var(--coral);
+    border-top: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .anchor .anchor-label {
+    font-size: 0.55em;
+    color: var(--coral);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .anchor .anchor-text {
+    font-size: 0.68em;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .brussels {
+    margin-top: 6px;
+    padding: 14px 0 0;
+    border-top: 1px solid var(--rule-2);
+    font-size: 0.66em;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .brussels strong { color: var(--ink); }
+
+  /* ───────── Close slides ───────── */
+
+  .close-slide {
+    text-align: left;
+  }
+  .close-slide .close-text {
+    font-size: 1.05em;
+    line-height: 1.5;
+    max-width: 920px;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .close-slide .close-text strong {
+    color: var(--coral);
+    font-weight: 600;
+  }
+
+  /* ───────── Citation footer ───────── */
+
+  .citation-footer {
+    margin-top: 28px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule-2);
+    text-align: left;
+    font-size: 0.38em;
+    color: var(--soft);
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    max-width: 1000px;
+  }
+
+  /* ───────── Slide-level overrides ───────── */
+
+  .reveal section.tall { padding-top: 40px; }
+
+  /* ───────── v2 Q1 heat-map pattern ───────── */
+
+  .q1-slide {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .q1-slide .stakeholder-num {
+    margin-bottom: 14px;
+  }
+
+  .q1-slide .stakeholder-title {
+    font-size: 2.0em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+
+  .q1-slide .stakeholder-sub {
+    margin-bottom: 18px;
+    font-size: 0.85em;
+  }
+
+  .heat-map-wrap {
+    display: block;
+    margin: 14px 0 16px 0;
+  }
+  .heat-map-svg {
+    width: 100%;
+    max-width: 580px;
+    height: auto;
+    display: block;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .q1-climax-rule {
+    height: 2px;
+    width: 60px;
+    background: var(--coral);
+    margin: 0 0 14px 0;
+    border-radius: 1px;
+  }
+
+  .reveal .slides section ul.slide-bullets,
+  .slide-bullets {
+    list-style: none !important;
+    list-style-type: none !important;
+    padding: 0 !important;
+    margin: 14px 0 0 0;
+    max-width: 800px;
+  }
+  .reveal .slides section ul.slide-bullets li,
+  .slide-bullets li {
+    list-style: none !important;
+    font-size: 0.42em;
+    color: var(--ink);
+    padding: 5px 0;
+    line-height: 1.55;
+    position: relative;
+    padding-left: 26px;
+    font-weight: 500;
+  }
+  .reveal .slides section ul.slide-bullets li::marker,
+  .slide-bullets li::marker {
+    content: "" !important;
+    display: none;
+  }
+  .reveal .slides section ul.slide-bullets li::before,
+  .slide-bullets li::before {
+    content: "▸";
+    color: #C44536;
+    position: absolute;
+    left: 0;
+    top: 5px;
+    font-size: 1.05em;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  .slide-footer {
+    position: absolute;
+    bottom: 18px;
+    left: 50px;
+    text-align: left;
+    font-size: 10px;
+    color: var(--soft);
+    letter-spacing: 0.14em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+
+
+  /* ───────── v5.2: Q5 governance frameworks (3-column) ───────── */
+
+  .framework-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0 12px;
+    max-width: 1180px;
+  }
+  .framework-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--coral);
+    padding: 14px 14px 12px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  .framework-card .layer-label {
+    font-size: 0.32em;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--coral);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .framework-card .fw-name {
+    font-size: 0.7em;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+    line-height: 1.15;
+  }
+  .framework-card .fw-tag {
+    font-size: 0.34em;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .framework-card .fw-body {
+    font-size: 0.32em;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 10px;
+  }
+  .framework-card .fw-body strong { color: var(--ink); font-weight: 700; }
+  .framework-card .fw-source {
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--rule-2);
+    font-size: 0.26em;
+    color: var(--soft);
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+  }
+
+  .framework-thesis {
+    background: white;
+    border-left: 3px solid var(--coral);
+    border-top: 1px solid var(--rule);
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 14px 18px;
+    margin-top: 6px;
+    font-size: 0.42em;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 1160px;
+  }
+  .framework-thesis .thesis-head {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--coral);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .framework-thesis strong { color: var(--coral); font-weight: 700; }
+
+  /* ───────── v5: Q5 microcosm comparison ───────── */
+
+  .microcosm-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 18px 0 14px;
+    max-width: 1080px;
+  }
+  .microcosm-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--coral);
+    padding: 20px 22px 18px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  .microcosm-card .scale-label {
+    font-size: 0.42em;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--coral);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .microcosm-card .case-name {
+    font-size: 0.9em;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 12px;
+    line-height: 1.15;
+  }
+  .microcosm-card .case-body {
+    font-size: 0.4em;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 8px;
+  }
+  .microcosm-card .case-body strong { color: var(--ink); }
+  .microcosm-card .source {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule-2);
+    font-size: 0.32em;
+    color: var(--soft);
+    letter-spacing: 0.04em;
+  }
+  .shared-finding {
+    text-align: left;
+    font-size: 0.5em;
+    color: var(--ink);
+    background: #f7e9e5;
+    border-left: 3px solid var(--coral);
+    padding: 14px 22px;
+    margin: 8px 0 0;
+    font-weight: 500;
+    max-width: 1080px;
+    line-height: 1.5;
+  }
+  .shared-finding strong { color: var(--coral); font-weight: 700; }
+
+  .sector-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 14px 0 12px;
+    max-width: 1080px;
+  }
+  .sector-tile {
+    background: white;
+    border: 1px solid var(--rule);
+    padding: 14px 16px;
+    border-radius: 3px;
+    font-size: 0.38em;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+  .sector-tile .sector-name {
+    color: var(--coral);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.95em;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .sector-tile strong { color: var(--ink); }
+
+  .build-in-callout {
+    background: white;
+    border: 1.5px solid var(--coral);
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin-top: 14px;
+    font-size: 0.5em;
+    line-height: 1.5;
+    color: var(--ink);
+    max-width: 1080px;
+  }
+  .build-in-callout .callout-head {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--coral);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  /* ───────── v5: Reveal nav + counter sizing ───────── */
+
+  .reveal .slide-number {
+    font-family: 'Inter', system-ui, sans-serif !important;
+    background: rgba(255,255,255,0.92) !important;
+    color: #1a1a1a !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    bottom: 16px !important;
+    left: 22px !important;
+    right: auto !important;
+    top: auto !important;
+    padding: 6px 14px !important;
+    border-radius: 999px !important;
+    border: 1.5px solid #444 !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12) !important;
+  }
+
+  /* Reveal nav arrows: larger sizing + darker */
+  .reveal .controls {
+    transform: scale(1.5) !important;
+    transform-origin: bottom right !important;
+  }
+  .reveal .controls .controls-arrow {
+    color: #1a1a1a !important;
+    opacity: 0.7 !important;
+  }
+  .reveal .controls .controls-arrow:hover {
+    opacity: 1 !important;
+  }
+
+  .reveal .progress {
+    height: 4px !important;
+  }
+
+  /* ───────── Fullscreen present mode ───────── */
+
+  body.present-mode #timer-start-btn,
+  body.present-mode #timer-elapsed,
+  body.present-mode #timer-pause-btn,
+  body.present-mode #slide-progress-bar,
+  body.present-mode #section-label,
+  body.present-mode #present-btn {
+    display: none !important;
+  }
+  body.present-mode .reveal .slide-number {
+    display: none !important;
+  }
+  body.present-mode .reveal .controls {
+    display: none !important;
+  }
+  body.present-mode .reveal .progress {
+    display: none !important;
+  }
+  body.present-mode #exit-present-btn {
+    display: block !important;
+  }
+
+  #exit-present-btn {
+    display: none;
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 9999;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  #exit-present-btn:hover {
+    opacity: 1 !important;
+    background: rgba(0,0,0,0.7);
+  }
+
+  /* ───────── Close slide two-column layout ───────── */
+
+  .close-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: start;
+  }
+  .close-col {
+    /* each column */
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ── Present Mode button ── -->
+<button id="present-btn"
+        style="position: fixed; top: 18px; right: 260px;
+               z-index: 1000; font-size: 20px; padding: 14px 28px;
+               border-radius: 999px; border: 1.5px solid #444;
+               background: #1a1a1a; cursor: pointer;
+               font-family: 'Inter', system-ui, sans-serif;
+               color: #fff; font-weight: 700;
+               letter-spacing: 0.04em;
+               box-shadow: 0 2px 6px rgba(0,0,0,0.18);">
+  ▶ Present
+</button>
+<button id="exit-present-btn">✕ Exit Present</button>
+
+<!-- ── Timer UI (v4) ── -->
+<button id="timer-start-btn"
+        style="position: fixed; top: 18px; right: 26px;
+               z-index: 1000; font-size: 20px; padding: 14px 28px;
+               border-radius: 999px; border: 1.5px solid #444;
+               background: #fff; cursor: pointer;
+               font-family: 'Inter', system-ui, sans-serif;
+               color: #1a1a1a; font-weight: 700;
+               letter-spacing: 0.04em;
+               box-shadow: 0 2px 6px rgba(0,0,0,0.12);">
+  ▶ Start timer
+</button>
+
+<button id="timer-pause-btn"
+        style="position: fixed; top: 18px; right: 176px;
+               z-index: 1000; font-size: 20px; padding: 14px 28px;
+               border-radius: 999px; border: 1.5px solid #444;
+               background: #fff; cursor: pointer;
+               font-family: 'Inter', system-ui, sans-serif;
+               color: #1a1a1a; font-weight: 700;
+               letter-spacing: 0.04em;
+               box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+               display: none;">
+  ⏸ Pause
+</button>
+
+<div id="timer-elapsed"
+     style="position: fixed; top: 18px; right: 26px;
+            z-index: 1000; font-size: 22px; padding: 14px 26px;
+            border-radius: 999px; border: 1.5px solid #444;
+            background: rgba(255,255,255,0.96);
+            font-variant-numeric: tabular-nums;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 700;
+            color: #2e7d32;
+            display: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            letter-spacing: 0.02em;">
+  0:00 / 10:00
+</div>
+
+<div id="slide-progress-bar"
+     style="position: fixed; bottom: 0; left: 0;
+            height: 5px; width: 100%;
+            background: #ebe7dd;
+            z-index: 999;">
+  <div id="slide-progress-fill"
+       style="height: 100%; width: 100%;
+              background: #4caf50;
+              transition: width 0.1s linear, background-color 0.3s linear;">
+  </div>
+</div>
+
+<div class="section-label" id="section-label"><span class="dot"></span><span class="label-text">INTRO</span></div>
+
+<div class="reveal">
+<div class="slides">
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- SECTION 1 · INTRO                                              -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section data-section="INTRO">
+
+  <!-- 1.1 ─ Personal hook (G's opening) -->
+  <section data-time-cue="120">
+    <div class="eyebrow">Before the algorithm</div>
+    <h1 style="font-size:2.2em; line-height:1.15; max-width:920px; margin-bottom:0.6em;">Access is uneven before any algorithm is involved.</h1>
+    <p style="font-size:1.05em; color:var(--muted); max-width:880px; line-height:1.5; font-weight:400;">
+      The system spends less on patients who already had less access. Then we train on that spending and call it need.
+    </p>
+    <div class="citation-footer">
+      Obermeyer, Z., Powers, B., Vogeli, C., &amp; Mullainathan, S. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. <em>Science, 366</em>(6464), 447–453.
+    </div>
+    <aside class="notes">1.1 personal hook.</aside>
+  </section>
+
+  <!-- 1.2 ─ Case in one breath (relocated; was original 1.1) -->
+  <section data-time-cue="45">
+    <div class="eyebrow">The case in one breath</div>
+    <ul class="breath-list">
+      <li>One real algorithm.</li>
+      <li>Used by US hospitals to flag patients for high-risk care management.</li>
+      <li>Ranked patients by predicted cost. The assumption: costlier means sicker.</li>
+      <li>That assumption broke along racial lines.</li>
+      <li>Black patients were under-flagged. The system spends less on them at the same level of illness.</li>
+    </ul>
+    <div class="citation-footer">
+      Obermeyer, Z., Powers, B., Vogeli, C., &amp; Mullainathan, S. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. <em>Science, 366</em>(6464), 447–453.
+    </div>
+    <aside class="notes">1.2 case in one breath.</aside>
+  </section>
+
+  <!-- 1.3 ─ The three figures, locked -->
+  <section class="tall" data-time-cue="30">
+    <div class="eyebrow">The three figures, locked</div>
+    <h2 style="font-size:1.2em; color:var(--muted); font-weight:500; margin-bottom:24px;">Three separate findings.</h2>
+    <div class="figure-grid">
+      <div class="figure-card">
+        <div class="figure-number">84%</div>
+        <div class="figure-name">Bias reduction</div>
+        <div class="figure-is"><strong>What it is</strong>The researchers kept the model but changed its target to combine cost with direct measures of illness. Missed illness in Black patients fell from 48,772 excess conditions to 7,758, an 84% drop. Far more genuinely sick Black patients would now be flagged for extra care.</div>
+        <div class="figure-isnot"><strong>What it is not</strong>A rise in chronic conditions in any group.</div>
+        <div class="figure-source">Obermeyer et al. (2019), p. 453.</div>
+      </div>
+      <div class="figure-card">
+        <div class="figure-number">17.7% &rarr; 46.5%</div>
+        <div class="figure-name">Black enrolment share</div>
+        <div class="figure-is"><strong>What it is</strong>A what-if. If the score tracked health instead of cost, the share of Black patients flagged for automatic referral would rise from 17.7% to 46.5%. The size of that jump is the size of the problem with the old target.</div>
+        <div class="figure-isnot"><strong>What it is not</strong>The same finding as the 84%. Two different experiments, two different numbers.</div>
+        <div class="figure-source">Obermeyer et al. (2019), abstract and Fig. 1B.</div>
+      </div>
+      <div class="figure-card">
+        <div class="figure-number">$1,801</div>
+        <div class="figure-name">Less spending per year</div>
+        <div class="figure-is"><strong>What it is</strong>At the same level of illness, the system spent $1,801 less per year on each Black patient. The model learned that pattern and read "cheaper" as "healthier."</div>
+        <div class="figure-isnot"><strong>What it is not</strong>A health gap. An access gap.</div>
+        <div class="figure-source">Obermeyer et al. (2019), p. 450.</div>
+      </div>
+    </div>
+    <aside class="notes">1.3 three figures.</aside>
+  </section>
+
+  <!-- 1.4 ─ Frame thesis (with bias curve) -->
+  <section data-time-cue="15">
+    <div class="eyebrow">The frame</div>
+    <h1 style="font-size:1.9em; line-height:1.2; max-width:960px; margin-top:0.2em; color:var(--ink);">
+      Right algorithm. <span style="color:var(--coral);">Wrong target.</span>
+    </h1>
+    <div style="font-size:0.62em; color:var(--muted); max-width:980px; margin-top:0.4em; line-height:1.4;">
+      A cost stand-in launders the system's existing inequality into a number that looks neutral.
+    </div>
+    <div style="margin-top:18px; max-width:1080px;">
+      <svg viewBox="0 0 820 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+
+        <!-- Title inside SVG, audience-facing -->
+        <text x="50" y="28" font-family="Inter, system-ui, sans-serif" font-size="17" font-weight="700" fill="#1a1a1a">
+          More chronic illness at every risk score.
+        </text>
+        <text x="50" y="50" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#5a5a5a">
+          The gap is widest among the top sliver flagged for automatic referral.
+        </text>
+
+        <!-- Plot area frame -->
+        <line x1="80" y1="80" x2="80" y2="280" stroke="#bcbcbc" stroke-width="1.5"/>
+        <line x1="80" y1="280" x2="770" y2="280" stroke="#bcbcbc" stroke-width="1.5"/>
+
+        <!-- Y axis ticks (0 to 6 chronic conditions) -->
+        <g font-family="Inter, system-ui, sans-serif" font-size="11" fill="#8c8c8c">
+          <text x="72" y="285" text-anchor="end">0</text>
+          <text x="72" y="252" text-anchor="end">1</text>
+          <text x="72" y="219" text-anchor="end">2</text>
+          <text x="72" y="186" text-anchor="end">3</text>
+          <text x="72" y="153" text-anchor="end">4</text>
+          <text x="72" y="120" text-anchor="end">5</text>
+          <text x="72" y="87"  text-anchor="end">6</text>
+        </g>
+
+        <!-- Y axis label -->
+        <text x="22" y="180" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#5a5a5a" transform="rotate(-90 22 180)" text-anchor="middle">
+          Average chronic conditions
+        </text>
+
+        <!-- X axis ticks -->
+        <g font-family="Inter, system-ui, sans-serif" font-size="11" fill="#8c8c8c">
+          <text x="80"  y="300" text-anchor="middle">low</text>
+          <text x="425" y="300" text-anchor="middle">risk score (low to high)</text>
+          <text x="770" y="300" text-anchor="middle">high</text>
+        </g>
+        <text x="425" y="330" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#5a5a5a" text-anchor="middle">
+          The algorithm ranks patients here →
+        </text>
+
+        <!-- top 3% threshold line -->
+        <line x1="710" y1="80" x2="710" y2="280" stroke="#8c8c8c" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="710" y="73" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#5a5a5a" text-anchor="middle">
+          top 3%, automatic referral
+        </text>
+
+        <!-- White-patient curve (teal, lower), illustrative -->
+        <path d="M 80 270 Q 200 260 320 240 T 560 200 T 710 165 L 770 153"
+              fill="none" stroke="#0d7377" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- Black-patient curve (coral, higher), illustrative -->
+        <path d="M 80 263 Q 200 250 320 225 T 560 175 T 710 132 L 770 113"
+              fill="none" stroke="#C44536" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- Threshold dots and annotations -->
+        <circle cx="710" cy="132" r="8" fill="#C44536" stroke="#fff" stroke-width="2.5"/>
+        <circle cx="710" cy="165" r="8" fill="#0d7377" stroke="#fff" stroke-width="2.5"/>
+
+        <text x="735" y="128" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#C44536" stroke="#fafaf7" stroke-width="3" paint-order="stroke">
+          4.8
+        </text>
+        <text x="735" y="172" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="800" fill="#0d7377" stroke="#fafaf7" stroke-width="3" paint-order="stroke">
+          3.8
+        </text>
+
+        <!-- Legend -->
+        <g transform="translate(100, 95)">
+          <rect x="0" y="0" width="220" height="56" fill="#ffffff" stroke="#d8d4cb" stroke-width="1" rx="3"/>
+          <line x1="14" y1="18" x2="36" y2="18" stroke="#C44536" stroke-width="3.5" stroke-linecap="round"/>
+          <text x="44" y="22" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1a1a1a">Black patients</text>
+          <line x1="14" y1="40" x2="36" y2="40" stroke="#0d7377" stroke-width="3.5" stroke-linecap="round"/>
+          <text x="44" y="44" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1a1a1a">White patients</text>
+        </g>
+
+      </svg>
+      <div style="margin-top:14px; max-width:1000px; font-size:0.42em; line-height:1.55; color:var(--ink); background:white; border-left:3px solid var(--teal); padding:12px 16px;">
+        <strong>Risk score</strong> is the algorithm's prediction of who will cost the most. The hospital used it to decide who gets extra care. At the same score, Black patients were actually sicker; the score under-counted their health needs.
+      </div>
+      <div style="margin-top:8px; font-size:0.34em; color:var(--soft); max-width:1000px;">
+        Data: Obermeyer et al. (2019), Fig. 1A. Curves illustrative; the 4.8 and 3.8 values at the top 3% automatic-referral threshold are exact.
+      </div>
+    </div>
+    <aside class="notes">1.4 · Frame thesis with bias curve.</aside>
+  </section>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- SECTION 2 · Q1 (Stakeholders)                                  -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section data-section="Q1: STAKEHOLDERS">
+
+  <!-- Q1.1 Vendor data scientists -->
+  <section class="q1-slide" data-time-cue="27">
+    <div class="stakeholder-num">Stakeholder 1 of 10 · the origin node</div>
+    <h1 class="stakeholder-title">Vendor data scientists</h1>
+    <div class="stakeholder-sub" style="font-size:0.7em; margin-bottom:10px;">Built the model right. Picked the outcome wrong.</div>
+    <div class="heat-map-wrap" style="margin:6px 0 14px 0;"><div id="hm-1" class="heat-map-svg" style="max-width:600px;"></div></div>
+    <div style="font-size:0.52em; color:var(--ink); margin:6px 0 12px; max-width:1040px; line-height:1.5;">
+      Cost was used as a stand-in for health. But health is biomarkers, not dollars.
+    </div>
+    <table style="border-collapse:collapse; width:100%; max-width:1060px; margin-left:0; margin-right:auto; font-size:0.4em; line-height:1.4;">
+      <thead>
+        <tr style="border-bottom:2px solid var(--teal);">
+          <th style="text-align:left; padding:5px 8px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; font-weight:700;">Health marker</th>
+          <th style="text-align:left; padding:5px 8px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; font-weight:700;">Gap at the same risk score</th>
+          <th style="text-align:left; padding:5px 8px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; font-weight:700;">What it means</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--rule-2);">
+          <td style="padding:5px 8px;"><strong>HbA1c</strong> (blood sugar)</td>
+          <td style="padding:5px 8px; color:var(--coral); font-weight:600;">Black patients +0.6 pts</td>
+          <td style="padding:5px 8px;">about 30% higher all-cause mortality</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--rule-2);">
+          <td style="padding:5px 8px;"><strong>Systolic BP</strong> (blood pressure)</td>
+          <td style="padding:5px 8px; color:var(--coral); font-weight:600;">Black patients +5.7 mmHg</td>
+          <td style="padding:5px 8px;">about 7.6% higher all-cause mortality</td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--rule-2);">
+          <td style="padding:5px 8px;"><strong>Creatinine</strong> (kidney)</td>
+          <td style="padding:5px 8px; color:var(--coral); font-weight:600;">worse for Black patients</td>
+          <td style="padding:5px 8px;">higher reading means worse kidney function</td>
+        </tr>
+        <tr>
+          <td style="padding:5px 8px;"><strong>Hematocrit</strong> (anemia)</td>
+          <td style="padding:5px 8px; color:var(--coral); font-weight:600;">worse for Black patients</td>
+          <td style="padding:5px 8px;">lower reading means more anemia</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px; font-size:0.48em; color:var(--ink); font-weight:500; max-width:1060px; line-height:1.5;">
+      Same score. Worse health. The model measured cost, and the system spent less on Black patients because it always had.
+    </div>
+    <div style="margin-top:6px; font-size:0.3em; color:var(--soft); max-width:1060px; line-height:1.4;">
+      Gaps at matched risk score: Obermeyer et al. (2019), p. 449 (HbA1c, systolic BP). Creatinine and hematocrit: direction from Fig. 2D and 2E; exact matched-score values not reported in the paper.
+    </div>
+    <div class="slide-footer">Q1.1</div>
+    <aside class="notes">Q1.1 · Vendor data scientists. ~30s.</aside>
+  </section>
+
+  <!-- Q1.2 The vendor (Optum / Impact Pro) -->
+  <section class="q1-slide" data-time-cue="33">
+    <div class="stakeholder-num">Stakeholder 2 of 10 · the vendor</div>
+    <h1 class="stakeholder-title">The vendor</h1>
+    <div class="stakeholder-sub">Anonymous in paper. Named the next day by reporting.</div>
+    <div class="heat-map-wrap"><div id="hm-2" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>Optum / Impact Pro (UnitedHealth subsidiary)</li>
+      <li>Reached ~200M Americans before audit</li>
+      <li>Replicated bias on 3.7M patients</li>
+      <li>Co-developed the 84% fix under pressure</li>
+    </ul>
+    <div class="slide-footer">Q1.2</div>
+    <aside class="notes">Q1.2 · The vendor. Reporting-sourced. ~35s.</aside>
+  </section>
+
+  <!-- Q1.3 Insurance and payer side -->
+  <section class="q1-slide" data-time-cue="24">
+    <div class="stakeholder-num">Stakeholder 3 of 10 · the inherited bias</div>
+    <h1 class="stakeholder-title">Insurance and payers</h1>
+    <div class="stakeholder-sub">The training signal was already racially skewed.</div>
+    <div class="heat-map-wrap"><div id="hm-3" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>Claims approved on cost criteria</li>
+      <li>Skewed approval became training signal</li>
+      <li>Bias inherited, not invented</li>
+    </ul>
+    <div class="slide-footer">Q1.3</div>
+    <aside class="notes">Q1.3 · Insurance and payers. ~25s.</aside>
+  </section>
+
+  <!-- Q1.4 Hospital executives -->
+  <section class="q1-slide" data-time-cue="30">
+    <div class="stakeholder-num">Stakeholder 4 of 10 · the deployer</div>
+    <h1 class="stakeholder-title">Hospital executives</h1>
+    <div class="stakeholder-sub">Bought without asking what they were buying.</div>
+    <div class="heat-map-wrap"><div id="hm-4" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>Procured to control cost</li>
+      <li>Never asked for explainability</li>
+      <li>Never asked about societal impact</li>
+      <li>Liability for design they didn't make</li>
+    </ul>
+    <div class="slide-footer">Q1.4</div>
+    <aside class="notes">Q1.4 · Hospital executives. ~30s.</aside>
+  </section>
+
+  <!-- Q1.5 Treating physicians -->
+  <section class="q1-slide" data-time-cue="32">
+    <div class="stakeholder-num">Stakeholder 5 of 10 · the human in the loop</div>
+    <h1 class="stakeholder-title">Treating physicians</h1>
+    <div class="stakeholder-sub">A score, not the biomarkers. No second look.</div>
+    <div class="heat-map-wrap"><div id="hm-5" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>Saw score, not biomarkers</li>
+      <li>No second look with context</li>
+      <li>Override redressed small fraction</li>
+      <li>Anchored on the score, not the patient</li>
+    </ul>
+    <div class="slide-footer">Q1.5</div>
+    <aside class="notes">Q1.5 · Treating physicians. ~30s.</aside>
+  </section>
+
+  <!-- Q1.6 Black patients -->
+  <section class="q1-slide" data-time-cue="50">
+    <div class="stakeholder-num">Stakeholder 6 of 10 · where the harm lands</div>
+    <h1 class="stakeholder-title">Black patients</h1>
+    <div class="stakeholder-sub">Sicker at every risk score. Invisible to themselves.</div>
+    <div class="heat-map-wrap"><div id="hm-6" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>4.8 vs 3.8 conditions in the top 3%</li>
+      <li>26.3% gap in chronic illness</li>
+      <li>HbA1c +0.6%, BP +5.7 mmHg</li>
+      <li>Harm invisible to those harmed</li>
+    </ul>
+    <div class="slide-footer">Q1.6</div>
+    <aside class="notes">Q1.6 · Black patients. Analytical centre. ~50s. Slow delivery; biomarker numbers as evidence.</aside>
+  </section>
+
+  <!-- Q1.7 Families and caregivers -->
+  <section class="q1-slide" data-time-cue="22">
+    <div class="stakeholder-num">Stakeholder 7 of 10 · the shadow cost</div>
+    <h1 class="stakeholder-title">Families and caregivers</h1>
+    <div class="stakeholder-sub">The unpaid ledger.</div>
+    <div class="heat-map-wrap"><div id="hm-7" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>Absorb the unpaid care</li>
+      <li>Visible on no balance sheet</li>
+      <li>Carry the shadow cost</li>
+      <li>No AI law names them as a stakeholder</li>
+    </ul>
+    <div class="slide-footer">Q1.7</div>
+    <aside class="notes">Q1.7 · Families and caregivers. Shadow cost · P8. ~20s.</aside>
+  </section>
+
+  <!-- Q1.8 The climax · Auditors + NY regulators -->
+  <section class="q1-slide" data-time-cue="77">
+    <div class="stakeholder-num" style="color:var(--coral);">Stakeholder 8 of 10 · forced accountability</div>
+    <h1 class="stakeholder-title">Auditors and regulators</h1>
+    <div class="stakeholder-sub">Accountability was forced from outside.</div>
+    <div class="q1-climax-rule"></div>
+    <div class="heat-map-wrap"><div id="hm-8" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>Rare full input-output access</li>
+      <li>Algorithm ran years in production before audit</li>
+      <li>New York Dept of Financial Services + Dept of Health · stop or justify</li>
+      <li>Optum named the day after publication</li>
+      <li>Confirmed bias, co-developed 84% fix</li>
+    </ul>
+    <div class="slide-footer">Q1.8</div>
+    <aside class="notes">Q1.8 · Auditors + regulators. Climax · zoom lands hardest here. ~75s.</aside>
+  </section>
+
+
+  <!-- Q1.9 UnitedHealth Group (parent corporation) -->
+  <section class="q1-slide" data-time-cue="28">
+    <div class="stakeholder-num">Stakeholder 9 of 10 · the parent corporation</div>
+    <h1 class="stakeholder-title">UnitedHealth Group</h1>
+    <div class="stakeholder-sub">Owned the tool via Optum. Took the regulatory hit.</div>
+    <div class="heat-map-wrap"><div id="hm-9" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>Parent of Optum, owner of the algorithm</li>
+      <li>Years of deployment before any external audit</li>
+      <li>New York Dept of Financial Services letter went to the UnitedHealth CEO</li>
+      <li>Confirmed bias and co-developed the fix</li>
+    </ul>
+    <div class="slide-footer">Q1.9</div>
+    <aside class="notes">Q1.9 UnitedHealth Group.</aside>
+  </section>
+
+  <!-- Q1.10 Other health systems and broader patient population -->
+  <section class="q1-slide" data-time-cue="26">
+    <div class="stakeholder-num">Stakeholder 10 of 10 · the systemic scope</div>
+    <h1 class="stakeholder-title">Other health systems and patients</h1>
+    <div class="stakeholder-sub">~200M Americans on similar tools. Obermeyer is one case.</div>
+    <div class="heat-map-wrap"><div id="hm-10" class="heat-map-svg"></div></div>
+    <ul class="slide-bullets">
+      <li>~200M Americans subject to similar tools</li>
+      <li>Industry-wide adoption, no industry-wide audit</li>
+      <li>The architecture is everywhere, not just this case</li>
+      <li>Risk multiplies across vendors and systems</li>
+    </ul>
+    <div class="slide-footer">Q1.10</div>
+    <aside class="notes">Q1.10 systemic scope.</aside>
+  </section>
+
+
+  <!-- Q1.11 The full stakeholder landscape -->
+  <section data-time-cue="35">
+    <div class="eyebrow">The full landscape</div>
+    <h1 style="font-size:1.62em; line-height:1.1; margin:0 0 4px;">20+ stakeholders. Five layers.</h1>
+    <div class="stakeholder-sub" style="margin-bottom:10px; font-size:0.76em;">The ten focused slides drilled into the most-impacted. The system reaches wider than that.</div>
+    <div style="max-width:1180px;">
+<svg viewBox="0 0 1180 692" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;" font-family="Inter, system-ui, sans-serif">
+<text x="344.75" y="21" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">Human</text>
+<text x="344.75" y="32" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">oversight</text>
+<text x="454.25" y="26" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">Transparency</text>
+<text x="563.75" y="26" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">Fairness</text>
+<text x="673.25" y="26" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">Safety</text>
+<text x="782.75" y="26" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">Validity</text>
+<text x="892.25" y="26" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">Accountability</text>
+<text x="954.0" y="20" text-anchor="middle" font-size="7" font-weight="700" fill="#8c8c8c" letter-spacing="1.5">AIDA</text>
+<text x="954.0" y="34" text-anchor="middle" font-size="7" font-weight="700" fill="#8c8c8c" letter-spacing="1.5">|</text>
+<text x="954.0" y="46" text-anchor="middle" font-size="7" font-weight="700" fill="#8c8c8c" letter-spacing="1.5">EU+</text>
+<text x="1015.75" y="26" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">Privacy</text>
+<text x="1125.25" y="21" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">Environmental</text>
+<text x="1125.25" y="32" text-anchor="middle" font-size="10" font-weight="700" fill="#1a1a1a">&amp; societal</text>
+<line x1="0" y1="48" x2="1180" y2="48" stroke="#1a1a1a" stroke-width="1"/>
+<text x="0" y="62" font-size="9" font-weight="800" fill="#C44536" letter-spacing="1.8">BUILDERS · WHO DESIGNED AND SOLD THE TOOL</text>
+<text x="0" y="83" font-size="11" font-weight="500" fill="#1a1a1a">Vendor data scientists</text>
+<rect x="292.0" y="70" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="401.5" y="70" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="70" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="70" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="70" width="105.5" height="18" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1"/>
+<rect x="839.5" y="70" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="70" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="70" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="105" font-size="11" font-weight="500" fill="#1a1a1a">Vendor company (Optum)</text>
+<rect x="292.0" y="92" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="401.5" y="92" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="92" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="92" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="92" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="92" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="92" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="92" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="127" font-size="11" font-weight="500" fill="#1a1a1a">UnitedHealth Group (parent)</text>
+<rect x="292.0" y="114" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="114" width="105.5" height="18" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1"/>
+<rect x="511.0" y="114" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="114" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="114" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="114" width="105.5" height="18" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1"/>
+<rect x="963.0" y="114" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="114" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="149" font-size="11" font-weight="500" fill="#1a1a1a">Other vendors with similar tools</text>
+<rect x="292.0" y="136" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="136" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="136" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="136" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="136" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="136" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="136" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="136" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="174" font-size="9" font-weight="800" fill="#C44536" letter-spacing="1.8">DEPLOYERS · WHO BOUGHT IT AND RAN IT</text>
+<text x="0" y="195" font-size="11" font-weight="500" fill="#1a1a1a">Hospital executives</text>
+<rect x="292.0" y="182" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="182" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="182" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="182" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="182" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="182" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="182" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="182" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="217" font-size="11" font-weight="500" fill="#1a1a1a">Hospital procurement teams</text>
+<rect x="292.0" y="204" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="204" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="204" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="620.5" y="204" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="730.0" y="204" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="204" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="204" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="204" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="239" font-size="11" font-weight="500" fill="#1a1a1a">Insurance and payers</text>
+<rect x="292.0" y="226" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="401.5" y="226" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="511.0" y="226" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="226" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="730.0" y="226" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="839.5" y="226" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="963.0" y="226" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="226" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="261" font-size="11" font-weight="500" fill="#1a1a1a">Other US health systems</text>
+<rect x="292.0" y="248" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="248" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="248" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="248" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="248" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="248" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="248" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="248" width="105.5" height="18" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="286" font-size="9" font-weight="800" fill="#C44536" letter-spacing="1.8">OPERATORS · WHO USED THE SCORE</text>
+<text x="0" y="307" font-size="11" font-weight="500" fill="#1a1a1a">Treating physicians</text>
+<rect x="292.0" y="294" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="294" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="294" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="620.5" y="294" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="294" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="294" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="294" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="294" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="329" font-size="11" font-weight="500" fill="#1a1a1a">Nurses and clinical staff</text>
+<rect x="292.0" y="316" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="316" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="511.0" y="316" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="620.5" y="316" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="316" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="839.5" y="316" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="963.0" y="316" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="316" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="354" font-size="9" font-weight="800" fill="#C44536" letter-spacing="1.8">HARM-BEARERS · WHO LIVED THE OUTPUT</text>
+<text x="0" y="375" font-size="11" font-weight="500" fill="#1a1a1a">Black patients</text>
+<rect x="292.0" y="362" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="362" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="362" width="105.5" height="18" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1"/>
+<rect x="620.5" y="362" width="105.5" height="18" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1"/>
+<rect x="730.0" y="362" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="362" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="362" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="362" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="397" font-size="11" font-weight="500" fill="#1a1a1a">White patients</text>
+<rect x="292.0" y="384" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="401.5" y="384" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="511.0" y="384" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="384" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="730.0" y="384" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="839.5" y="384" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="963.0" y="384" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="384" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="419" font-size="11" font-weight="500" fill="#1a1a1a">Families and caregivers</text>
+<rect x="292.0" y="406" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="401.5" y="406" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="511.0" y="406" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="406" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="406" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="839.5" y="406" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="963.0" y="406" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="406" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="441" font-size="11" font-weight="500" fill="#1a1a1a">Future patients on these tools</text>
+<rect x="292.0" y="428" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="428" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="428" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="428" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="428" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="428" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="428" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="428" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="463" font-size="11" font-weight="500" fill="#1a1a1a">Broader US population (~200M)</text>
+<rect x="292.0" y="450" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="450" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="450" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="450" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="450" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="450" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="450" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="450" width="105.5" height="18" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="488" font-size="9" font-weight="800" fill="#C44536" letter-spacing="1.8">ENFORCERS · WHO FORCED ACCOUNTABILITY</text>
+<text x="0" y="509" font-size="11" font-weight="500" fill="#1a1a1a">Academic researchers (Obermeyer team)</text>
+<rect x="292.0" y="496" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="496" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="496" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="496" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="496" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="496" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="496" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="496" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="531" font-size="11" font-weight="500" fill="#1a1a1a">Investigative journalism</text>
+<rect x="292.0" y="518" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="518" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="518" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="518" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="730.0" y="518" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="518" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="518" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="518" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="553" font-size="11" font-weight="500" fill="#1a1a1a">NY Dept of Financial Services + Dept of Health</text>
+<rect x="292.0" y="540" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="540" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="540" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="540" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="540" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="540" width="105.5" height="18" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1"/>
+<rect x="963.0" y="540" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="540" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="575" font-size="11" font-weight="500" fill="#1a1a1a">Other regulators (federal, state)</text>
+<rect x="292.0" y="562" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="401.5" y="562" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="562" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="562" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="730.0" y="562" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="562" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="562" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="562" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="597" font-size="11" font-weight="500" fill="#1a1a1a">Patient advocacy and civil rights</text>
+<rect x="292.0" y="584" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="401.5" y="584" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="511.0" y="584" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<rect x="620.5" y="584" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="730.0" y="584" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="839.5" y="584" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="584" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="584" width="105.5" height="18" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="622" font-size="9" font-weight="800" fill="#C44536" letter-spacing="1.8">MARKET · WHO CARRIED INDIRECT SIGNAL</text>
+<text x="0" y="643" font-size="11" font-weight="500" fill="#1a1a1a">UnitedHealth shareholders</text>
+<rect x="292.0" y="630" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="401.5" y="630" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="511.0" y="630" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="620.5" y="630" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="730.0" y="630" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<rect x="839.5" y="630" width="105.5" height="18" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<rect x="963.0" y="630" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<rect x="1072.5" y="630" width="105.5" height="18" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1" stroke-dasharray="3 2"/>
+<text x="0" y="678" font-size="9" font-weight="700" fill="#5a5a5a" letter-spacing="1.5">SEVERITY</text>
+<rect x="70" y="670" width="16" height="10" rx="2" fill="none" stroke="#bcbcbc" stroke-width="1"/>
+<text x="91" y="679" font-size="9" font-weight="500" fill="#5a5a5a">none</text>
+<rect x="150" y="670" width="16" height="10" rx="2" fill="#FCEBEB" stroke="#A32D2D" stroke-width="1"/>
+<text x="171" y="679" font-size="9" font-weight="500" fill="#5a5a5a">low</text>
+<rect x="230" y="670" width="16" height="10" rx="2" fill="#F7C1C1" stroke="#E24B4A" stroke-width="1"/>
+<text x="251" y="679" font-size="9" font-weight="500" fill="#5a5a5a">medium</text>
+<rect x="310" y="670" width="16" height="10" rx="2" fill="#F09595" stroke="#E24B4A" stroke-width="1"/>
+<text x="331" y="679" font-size="9" font-weight="500" fill="#5a5a5a">high</text>
+<rect x="390" y="670" width="16" height="10" rx="2" fill="#E24B4A" stroke="#791F1F" stroke-width="1"/>
+<text x="411" y="679" font-size="9" font-weight="500" fill="#5a5a5a">severe</text>
+<text x="480" y="679" font-size="9" font-weight="500" fill="#5a5a5a">· dashed border = EU principle absent from AIDA</text>
+</svg>
+    </div>
+    <div class="slide-footer">Q1.11</div>
+    <aside class="notes">Q1.11 landscape sweep.</aside>
+  </section>
+
+  <!-- Q1 close beat -->
+  <section data-time-cue="28">
+    <div class="eyebrow">The transparency gap.</div>
+    <div class="frame-block">
+      <p>The accountability didn't come from inside the system. It was forced from outside, by researchers and a regulator.</p>
+      <p>That is the transparency principle failing in real time.</p>
+      <p>The gap between deployment and accountability is the bigger story.</p>
+      
+    </div>
+    <aside class="notes">Q1 close beat. ~25s.</aside>
+  </section>
+
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- SECTION 3 · Q5 (Career learning)                               -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<section data-section="Q5: CAREER LEARNING">
+
+  <!-- Q5.1b Governance frameworks (three-column) -->
+  <section data-time-cue="45">
+    <div class="stakeholder-num" style="color:var(--coral);">Beat 1 of 5 · the governance stack</div>
+    <h1 class="stakeholder-title" style="font-size:1.5em; line-height:1.1; max-width:1180px;">Governance: built in, not bolted on.</h1>
+    <div class="stakeholder-sub">Three layers of the stack. Different modalities. Pre-flight, not patch.</div>
+
+    <div class="framework-grid">
+
+      <div class="framework-card">
+        <div class="layer-label">Academic anchor</div>
+        <div class="fw-name">Belenguer (2022)</div>
+        <div class="fw-tag">Pharma-inspired four-phase pre-flight model</div>
+        <p class="fw-body">
+          Adapts pharmaceutical clinical-trial discipline to AI. <strong>Phase I</strong> closed-environment testing for bias and data quality. <strong>Phase II</strong> secure-open testing via FairTest, AIF360. <strong>Phase III</strong> bias impact assessment against four values (autonomy, harm prevention, fairness, explicability). <strong>Phase IV</strong> monitored release with a compensation scheme when harm occurs. Argues for a transnational independent regulatory body.
+        </p>
+        <div class="fw-source">Belenguer, L. (2022). AI bias: machine-centric solutions adapted from the pharmaceutical industry. <em>AI and Ethics, 2,</em> 771–787.</div>
+      </div>
+
+      <div class="framework-card">
+        <div class="layer-label">Legal mandate</div>
+        <div class="fw-name">EU AI Act</div>
+        <div class="fw-tag">Risk-tiered by deployment context</div>
+        <p class="fw-body">
+          <strong>Article 6 + Annex III</strong> define "high-risk" by deployment context: biometrics, critical infrastructure, employment, essential services, law enforcement, migration, justice. High-risk obligations: third-party conformity, technical documentation, human oversight, post-market monitoring.
+        </p>
+        <p class="fw-body" style="background:#f7e9e5; padding:8px 10px; border-left:2px solid var(--coral); margin-top:8px;">
+          <strong>7 May 2026 Digital Omnibus.</strong> AI tied to machinery and safety products removed from scope entirely. Support systems for HR, education, services narrowed out of high-risk. Annex III deadline pushed to 2 Dec 2027; physical-product timeline to Aug 2028.
+        </p>
+        <div class="fw-source">EU AI Act, Regulation (EU) 2024/1689, Article 6 + Annex III. Digital Omnibus revisions, 7 May 2026.</div>
+      </div>
+
+      <div class="framework-card">
+        <div class="layer-label">Operational framework</div>
+        <div class="fw-name">NIST AI RMF 1.0</div>
+        <div class="fw-tag">Lifecycle risk-management functions</div>
+        <p class="fw-body">
+          Four functions across the AI lifecycle: <strong>Govern, Map, Measure, Manage</strong>. Voluntary, technology-neutral, widely adopted as a baseline by US industry. The <strong>Generative AI Profile (NIST-AI-600-1)</strong> extends the framework to GenAI-specific risks. Bridges principles to operational practice on real systems.
+        </p>
+        <div class="fw-source">NIST. (2023, Jan 26). AI Risk Management Framework 1.0. + NIST-AI-600-1, Generative AI Profile (July 2024).</div>
+      </div>
+
+    </div>
+
+    <div class="framework-thesis">
+      <div class="thesis-head">The thesis</div>
+      <strong>Profit, society, and the model are three pillars in tension.</strong> The feasible region is the set of solutions where all three hold. Lower-stake systems can lean lighter on explainability; higher-stake systems demand transparency and audit by design. The frameworks above already exist. The discipline is using them as a pre-flight mandate before the system ships, not as a compliance retrofit after harm lands.
+    </div>
+
+    <aside class="notes">Q5.1b governance frameworks. Three-column grid.</aside>
+  </section>
+
+  <!-- Q5.1 Same failure, different scale (microcosm) -->
+  <section data-time-cue="38">
+    <div class="stakeholder-num" style="color:var(--coral);">Beat 2 of 5 · same failure, different scale</div>
+    <h1 class="stakeholder-title">Obermeyer is the microcosm.</h1>
+    <div class="stakeholder-sub">One algorithm, one sector, in 2019. General-purpose AI by 2030.</div>
+
+    <div class="microcosm-grid">
+      <div class="microcosm-card">
+        <div class="scale-label">Today · narrow AI · one sector</div>
+        <div class="case-name">Obermeyer et al. (2019)</div>
+        <p class="case-body">
+          <strong>One healthcare algorithm.</strong> Principles intact. Deployment without measurement against real-world health outcomes. Bias quietly priced into care for an estimated 200 million Americans before anyone outside the vendor saw the math.
+        </p>
+        <div class="source">Obermeyer et al. (2019), <em>Science</em> 366:447–453.</div>
+      </div>
+      <div class="microcosm-card">
+        <div class="scale-label">By 2030 · general-purpose AI · every sector</div>
+        <div class="case-name">AI Futures Project forecast</div>
+        <p class="case-body">
+          <strong>The AI 2027 scenario, honestly updated.</strong> In November 2025 the authors moved the headline breakthroughs from 2027 to around 2030. The forecast moved three years. The deployment-governance lag did not close.
+        </p>
+        <div class="source">Kokotajlo et al., AI Futures Project, April 2025; honest update Nov 2025.</div>
+      </div>
+    </div>
+
+    <div class="shared-finding">
+      <strong>Same failure mode, different stakes.</strong> Generic AI deployed into high-stakes sectors with the principle layer intact but the measurement layer missing. Obermeyer is what that looks like on one algorithm. 2030 is what it looks like on the next decade.
+    </div>
+
+    <aside class="notes">Q5.1 microcosm.</aside>
+  </section>
+
+
+
+  <!-- Q5.2 The toolkit is wrong-ordered -->
+  <section data-time-cue="34">
+    <div class="stakeholder-num" style="color:var(--coral);">Beat 3 of 5 · the toolkit is wrong-ordered</div>
+    <h1 class="stakeholder-title" style="font-size:1.1em;">Stop at step one. Get Obermeyer.</h1>
+    <div class="stakeholder-sub">Principles. Process governance. Model measurement. Most deployments ship after step one.</div>
+
+    <div class="pipeline" style="margin-top:18px;">
+      <div class="step">
+        <div class="step-num">Step 1</div>
+        <div class="step-name">Principles</div>
+      </div>
+      <div class="arrow">&rarr;</div>
+      <div class="step">
+        <div class="step-num">Step 2</div>
+        <div class="step-name">Process governance</div>
+      </div>
+      <div class="arrow">&rarr;</div>
+      <div class="step">
+        <div class="step-num">Step 3</div>
+        <div class="step-name">Model measurement</div>
+      </div>
+    </div>
+
+    <div style="font-size:0.45em; color:var(--muted); margin: 6px 0 14px; max-width:1080px; line-height:1.5;">
+      High-stakes sectors are adopting generic AI without step two or step three. Four current examples:
+    </div>
+
+    <div class="sector-strip">
+      <div class="sector-tile">
+        <span class="sector-name">Healthcare</span>
+        <strong>Obermeyer (2019).</strong> Cost used as a stand-in for need ranked 200M Americans before audit.
+      </div>
+      <div class="sector-tile">
+        <span class="sector-name">Hiring</span>
+        <strong>EEOC, Jan 2025.</strong> Federal AI-in-hiring guidance withdrawn. State patchwork remains.
+      </div>
+      <div class="sector-tile">
+        <span class="sector-name">Public benefits</span>
+        <strong>State fraud-detection systems.</strong> Wrongful denials documented; appeal mechanisms thin.
+      </div>
+      <div class="sector-tile">
+        <span class="sector-name">Financial services</span>
+        <strong>Credit and underwriting.</strong> Disparate-impact risk under fair-lending regimes.
+      </div>
+    </div>
+
+    <div class="build-in-callout">
+      <div class="callout-head">The carry-forward</div>
+      Build measurement and oversight at the same time as the model, not after. Tools that industries adopt should have governance designed in, not bolted on later as a compliance exercise.
+    </div>
+
+    <aside class="notes">Q5.2 toolkit + sectors.</aside>
+  </section>
+
+  <!-- Q5.3 The gap, right now -->
+  <section class="tall" data-time-cue="45">
+    <div class="stakeholder-num" style="color:var(--coral);">Beat 4 of 5 · the gap, right now</div>
+    <h1 class="stakeholder-title" style="font-size:1.9em;">The deployment-accountability gap.</h1>
+    <div class="gap-summary">Both gaps opened at the same moment.</div>
+    <div class="gap-cols">
+      <div class="gap-col">
+        <h3>EU side</h3>
+        <p class="headline">Has the standard. Delayed the clock.</p>
+        <div class="detail">High-risk AI Act provisions deferred to 2 Dec 2027 (Annex III) and 2 Aug 2028 (Annex I) under the Digital Omnibus, 7 May 2026.</div>
+      </div>
+      <div class="gap-col">
+        <h3>US side</h3>
+        <p class="headline">Has the clock. Withdrew the standard.</p>
+        <div class="detail">EEOC pulled AI hiring guidance, January 2025. December 2025 executive order directs DOJ to litigate against state AI laws.</div>
+      </div>
+    </div>
+    <div class="outside-law">
+      <div class="head">Outside the law · what is happening anyway</div>
+      <p style="margin:0 0 6px;"><strong>ISACA Advanced in AI Audit (AAIA)</strong> launched 19 May 2025. First advanced audit-specific AI certification. Gated behind older designations: CISA, the Canadian CPA.</p>
+      <p style="margin:0;color:var(--muted);">Double edge: the people now certified to audit AI come from the existing professional establishment. Reassuring for rigour; real question about whose interests the audit serves. Both are true.</p>
+    </div>
+    <aside class="notes">Q5.3 gap right now.</aside>
+  </section>
+
+  <!-- Q5.4 Build it in, measure the output -->
+  <section data-time-cue="32">
+    <div class="stakeholder-num" style="color:var(--coral);">Beat 5 of 5 · build it in, measure the output</div>
+    <h1 class="stakeholder-title">Build it in. Measure the output.</h1>
+    <div class="anchor-pair">
+      <div class="anchor">
+        <div class="anchor-label">Anchor 1</div>
+        <div class="anchor-text"><strong>Machinery scope removal, 7 May 2026.</strong> AI tied to machinery and safety products was taken out of the EU AI Act's high-risk scope. Several services were narrowed out of "high-risk."</div>
+      </div>
+      <div class="anchor">
+        <div class="anchor-label">Anchor 2</div>
+        <div class="anchor-text"><strong>Simultaneous gap.</strong> Every major bloc has it at the same moment. Deployment is outrunning enforceable accountability.</div>
+      </div>
+    </div>
+    <div class="brussels">
+      <strong>The Brussels-effect tension.</strong>
+      The Brussels effect, the idea that the EU exports its standards worldwide through the gravity of its market (Bradford), remains limited for AI. If market gravity will not export accountability, then accountability has to be designed in by the people who build, deploy, and audit these systems. A limited Brussels effect makes the "build it in" thesis stronger, not weaker. The output has to be measurable. The toolkit has to be governable.
+    </div>
+    <aside class="notes">Q5.4 build-it-in close.</aside>
+  </section>
+
+  <!-- Q5 Close -->
+  <section class="close-slide" data-time-cue="40">
+    <div class="eyebrow">Close</div>
+    <div class="close-two-col">
+      <!-- LEFT: We are compromised -->
+      <div class="close-col">
+        <div class="close-text frame-block" style="text-align:left; font-size:0.85em; line-height:1.4; max-width:100%;">
+          <p>We are <strong>compromised</strong>, but not doomed.</p>
+          <p>The difference is whether governance is built in or bolted on. We cannot deploy generic AI into high-stakes sectors without designed-in governance and measurable outputs.</p>
+          <p>Order of operations: principles, process governance, model measurement, built in with the model. Industries should adopt tools that ship with governance, not tools that need it retrofitted.</p>
+        </div>
+      </div>
+      <!-- RIGHT: Black Point Analytics -->
+      <div class="close-col">
+        <div style="padding:16px 20px; background:white; border-left:3px solid var(--teal); height:100%;">
+          <div style="font-size:0.50em; text-transform:uppercase; letter-spacing:0.18em; color:var(--teal); font-weight:700; margin-bottom:8px;">Personal carry-forward</div>
+          <p style="margin:0; font-size:0.72em; line-height:1.45; color:var(--ink);">
+            At Black Point Analytics, the carry-forward is to build governance in at the design stage, before a regulator forces it and before any harm lands. Profit is one of three pillars; society and the model are the other two. The feasible region holds only when all three do, and the work I take on serves the people downstream of the system, not the story where one industry's bottom line decides whose harm is acceptable.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="attribution" style="margin-top:0.6em; font-size:0.55em; color:var(--soft); letter-spacing:0.12em; text-transform:uppercase; font-weight:600;">End</div>
+    <aside class="notes">Q5 close. ~35s. Personal carry-forward bookends the opening hook.</aside>
+  </section>
+
+</section>
+
+
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/notes/notes.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/zoom/zoom.min.js"></script>
+<script>
+  Reveal.initialize({
+    width:  1280,
+    height: 800,
+    margin: 0.06,
+    minScale: 0.2,
+    maxScale: 2.0,
+
+    transition: 'zoom',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+
+    controls: true,
+    progress: true,
+    hash: false,
+    center: true,
+    slideNumber: 'c/t',
+
+    plugins: [ RevealNotes, RevealZoom ]
+  });
+
+  // Section label updater
+  const sectionLabel = document.getElementById('section-label');
+  const labelText = sectionLabel.querySelector('.label-text');
+
+  function updateLabel() {
+    const current = Reveal.getCurrentSlide();
+    if (!current) return;
+    const parent = current.closest('section[data-section]');
+    const name = parent ? parent.dataset.section : '';
+    labelText.textContent = name;
+    // Q5 accent toggle
+    if (name.startsWith('Q5')) {
+      sectionLabel.classList.add('q5');
+      document.body.classList.add('q5');
+    } else {
+      sectionLabel.classList.remove('q5');
+      document.body.classList.remove('q5');
+    }
+  }
+
+  Reveal.on('ready', updateLabel);
+  Reveal.on('slidechanged', updateLabel);
+
+  // ─────────────────────────────────────────────────────────
+  // Q1 heat-map renderer (6 AIDA + 2 EU-adds, severity 0–4)
+  // ─────────────────────────────────────────────────────────
+
+  const SEV = [
+    { fill: 'none',      stroke: '#bcbcbc', text: '#7a7a7a' }, // 0 None
+    { fill: '#FCEBEB',   stroke: '#A32D2D', text: '#501313' }, // 1 Low
+    { fill: '#F7C1C1',   stroke: '#E24B4A', text: '#501313' }, // 2 Medium
+    { fill: '#F09595',   stroke: '#E24B4A', text: '#501313' }, // 3 High
+    { fill: '#E24B4A',   stroke: '#791F1F', text: '#501313' }  // 4 Severe
+  ];
+
+  const AIDA = [
+    ['Human', 'oversight'],
+    ['Transparency'],
+    ['Fairness'],
+    ['Safety'],
+    ['Validity'],
+    ['Accountability']
+  ];
+  const EU = [
+    ['Privacy'],
+    ['Environmental', '& societal']
+  ];
+
+  // Severity matrix per handoff §6
+  const HM_DATA = {
+    'hm-1': [1, 3, 3, 2, 4, 2, 1, 2],  // Q1.1 Vendor data scientists
+    'hm-2': [1, 3, 2, 2, 2, 3, 2, 2],  // Q1.2 The vendor (Optum)
+    'hm-3': [1, 1, 3, 1, 1, 1, 2, 3],  // Q1.3 Insurance and payers
+    'hm-4': [3, 3, 2, 2, 2, 3, 1, 3],  // Q1.4 Hospital executives
+    'hm-5': [3, 2, 1, 3, 3, 2, 1, 2],  // Q1.5 Treating physicians
+    'hm-6': [2, 3, 4, 4, 2, 2, 3, 3],  // Q1.6 Black patients
+    'hm-7': [1, 1, 2, 2, 1, 1, 1, 3],  // Q1.7 Families and caregivers
+    'hm-8':  [3, 3, 3, 2, 3, 3, 2, 2],  // Q1.8 Auditors and regulators
+    'hm-9':  [3, 4, 3, 2, 3, 4, 2, 3],  // Q1.9 UnitedHealth Group (parent)
+    'hm-10': [2, 3, 3, 2, 2, 2, 2, 4]   // Q1.10 Other systems + broader population
+  };
+
+  function buildCell(x, y, w, h, sev, lines, isEU) {
+    const c = SEV[sev];
+    const dash = isEU ? ' stroke-dasharray="4 3"' : '';
+    let svg = `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="${c.fill}" stroke="${c.stroke}" stroke-width="1.5"${dash}/>`;
+    const cx = x + w / 2;
+    const cy = y + h / 2;
+    if (lines.length === 1) {
+      svg += `<text x="${cx}" y="${cy + 4}" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="${c.text}">${lines[0]}</text>`;
+    } else {
+      svg += `<text x="${cx}" y="${cy - 1}" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="${c.text}">${lines[0]}</text>`;
+      svg += `<text x="${cx}" y="${cy + 13}" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="${c.text}">${lines[1]}</text>`;
+    }
+    return svg;
+  }
+
+  function makeHeatMap(severities) {
+    const W = 88, H = 56, GAP = 6;
+    const ROW1_Y = 8;
+    const DIV_Y = ROW1_Y + H + 16;
+    const ROW2_Y = DIV_Y + 14;
+    const TOTAL_W = 6 * W + 5 * GAP;
+    const SVG_H = ROW2_Y + H + 10;
+
+    let parts = [];
+
+    // Top row: 6 AIDA cells
+    for (let i = 0; i < 6; i++) {
+      const x = i * (W + GAP);
+      parts.push(buildCell(x, ROW1_Y, W, H, severities[i], AIDA[i], false));
+    }
+
+    // Divider rule + label
+    parts.push(`<line x1="0" y1="${DIV_Y}" x2="${TOTAL_W}" y2="${DIV_Y}" stroke="#d8d4cb" stroke-width="1"/>`);
+    parts.push(`<text x="${TOTAL_W / 2}" y="${DIV_Y - 4}" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#8c8c8c" letter-spacing="2">WHAT AIDA OMITS  ·  EU ADDS</text>`);
+
+    // Bottom row: 2 EU-adds centred under cells 3 and 4 (indices 2,3)
+    for (let i = 0; i < 2; i++) {
+      const x = (i + 2) * (W + GAP);
+      parts.push(buildCell(x, ROW2_Y, W, H, severities[6 + i], EU[i], true));
+    }
+
+    return `<svg viewBox="0 0 ${TOTAL_W} ${SVG_H}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" style="width:100%;height:auto;max-width:580px;">${parts.join('')}</svg>`;
+  }
+
+  function renderHeatMaps() {
+    for (const [id, sevs] of Object.entries(HM_DATA)) {
+      const el = document.getElementById(id);
+      if (el && !el.hasChildNodes()) {
+        el.innerHTML = makeHeatMap(sevs);
+      }
+    }
+  }
+
+  renderHeatMaps();
+  Reveal.on('ready', renderHeatMaps);
+
+  // ──────────────────────────────────────────────────────────
+  // Timer plugin (v4): start + pause + resume; per-slide
+  // progress bar depletes against data-time-cue (seconds).
+  // ──────────────────────────────────────────────────────────
+  (function () {
+    const CEILING_MS = 600000; // 10:00
+    const startBtn = document.getElementById('timer-start-btn');
+    const pauseBtn = document.getElementById('timer-pause-btn');
+    const elapsedPill = document.getElementById('timer-elapsed');
+    const progressFill = document.getElementById('slide-progress-fill');
+
+    let globalStart = null;
+    let slideStart = null;
+    let currentCueMs = 30000;
+    let timerInterval = null;
+    let paused = false;
+    let pausedAtGlobal = 0;  // accumulated ms when paused
+    let pausedAtSlide = 0;
+    let pauseStartTime = null;
+    let totalPausedMs = 0;   // total ms spent paused globally
+    let slidePausedMs = 0;   // total ms spent paused on current slide
+
+    function fmt(ms) {
+      const s = Math.max(0, Math.floor(ms / 1000));
+      return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    }
+
+    function getGlobalElapsed() {
+      if (paused) return pausedAtGlobal;
+      return Date.now() - globalStart - totalPausedMs;
+    }
+
+    function getSlideElapsed() {
+      if (paused) return pausedAtSlide;
+      return Date.now() - slideStart - slidePausedMs;
+    }
+
+    function updateGlobalPill(elapsed) {
+      const label = paused ? ' ⏸ / 10:00' : ' / 10:00';
+      elapsedPill.textContent = fmt(elapsed) + label;
+      if (elapsed > 570000) {
+        elapsedPill.style.color = '#c62828';
+      } else if (elapsed > 480000) {
+        elapsedPill.style.color = '#ef8b2c';
+      } else {
+        elapsedPill.style.color = '#2e7d32';
+      }
+    }
+
+    function updateSlideBar(slideElapsedMs) {
+      const remaining = Math.max(0, currentCueMs - slideElapsedMs);
+      const pct = (remaining / currentCueMs) * 100;
+      if (slideElapsedMs > currentCueMs) {
+        progressFill.style.background = '#c62828';
+        progressFill.style.width = '100%';
+      } else if (slideElapsedMs > currentCueMs * 0.8) {
+        progressFill.style.background = '#ef8b2c';
+        progressFill.style.width = pct + '%';
+      } else {
+        progressFill.style.background = '#4caf50';
+        progressFill.style.width = pct + '%';
+      }
+    }
+
+    function tick() {
+      if (!globalStart || paused) return;
+      updateGlobalPill(getGlobalElapsed());
+      updateSlideBar(getSlideElapsed());
+    }
+
+    startBtn.addEventListener('click', function () {
+      globalStart = Date.now();
+      slideStart = Date.now();
+      totalPausedMs = 0;
+      slidePausedMs = 0;
+      const currentSection = Reveal.getCurrentSlide();
+      const cue = currentSection ? currentSection.dataset.timeCue : '30';
+      currentCueMs = (parseInt(cue, 10) || 30) * 1000;
+      startBtn.style.display = 'none';
+      elapsedPill.style.display = 'block';
+      pauseBtn.style.display = 'block';
+      timerInterval = setInterval(tick, 100);
+      tick();
+    });
+
+    pauseBtn.addEventListener('click', function () {
+      if (!globalStart) return;
+      if (!paused) {
+        // Pause
+        paused = true;
+        pauseStartTime = Date.now();
+        pausedAtGlobal = getGlobalElapsed();
+        pausedAtSlide = getSlideElapsed();
+        pauseBtn.textContent = '▶ Resume';
+        pauseBtn.style.background = '#e8f5e9';
+        updateGlobalPill(pausedAtGlobal);
+      } else {
+        // Resume
+        const pauseDuration = Date.now() - pauseStartTime;
+        totalPausedMs += pauseDuration;
+        slidePausedMs += pauseDuration;
+        paused = false;
+        pauseStartTime = null;
+        pauseBtn.textContent = '⏸ Pause';
+        pauseBtn.style.background = '#fff';
+      }
+    });
+
+    Reveal.on('slidechanged', function (event) {
+      if (!globalStart) return;
+      // If paused during slide change, resume the pause tracking for new slide
+      slideStart = Date.now();
+      slidePausedMs = 0;
+      if (paused) {
+        pauseStartTime = Date.now(); // reset pause start for new slide tracking
+        pausedAtSlide = 0;
+      }
+      const cue = event.currentSlide.dataset.timeCue || '30';
+      currentCueMs = (parseInt(cue, 10) || 30) * 1000;
+      progressFill.style.width = '100%';
+      progressFill.style.background = '#4caf50';
+    });
+  })();
+
+  // ──────────────────────────────────────────────────────────
+  // Present mode: fullscreen + hide all UI chrome
+  // ──────────────────────────────────────────────────────────
+  (function () {
+    const presentBtn = document.getElementById('present-btn');
+    const exitBtn = document.getElementById('exit-present-btn');
+    let hoverTimeout;
+
+    presentBtn.addEventListener('click', function () {
+      document.body.classList.add('present-mode');
+      const el = document.documentElement;
+      if (el.requestFullscreen) {
+        el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+      } else if (el.msRequestFullscreen) {
+        el.msRequestFullscreen();
+      }
+    });
+
+    exitBtn.addEventListener('click', function () {
+      document.body.classList.remove('present-mode');
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+    });
+
+    // Show exit button on mouse move in present mode
+    document.addEventListener('mousemove', function () {
+      if (!document.body.classList.contains('present-mode')) return;
+      exitBtn.style.opacity = '0.8';
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(function () {
+        exitBtn.style.opacity = '0';
+      }, 2000);
+    });
+
+    // Exit present mode if fullscreen is exited via Escape
+    document.addEventListener('fullscreenchange', function () {
+      if (!document.fullscreenElement) {
+        document.body.classList.remove('present-mode');
+      }
+    });
+
+    // Keyboard shortcut: F key to toggle present mode
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'f' || e.key === 'F') {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (document.body.classList.contains('present-mode')) {
+          exitBtn.click();
+        } else {
+          presentBtn.click();
+        }
+      }
+    });
+  })();
+
+</script>
+</body>
+</html>
