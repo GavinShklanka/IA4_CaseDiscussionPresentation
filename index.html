@@ -997,7 +997,7 @@
     <div class="eyebrow">Before the algorithm</div>
     <h1 style="font-size:2.2em; line-height:1.15; max-width:920px; margin-bottom:0.6em;">Access is uneven before any algorithm is involved.</h1>
     <p style="font-size:1.05em; color:var(--muted); max-width:880px; line-height:1.5; font-weight:400;">
-      The system spends less on patients who already had less access. Then we train on that spending and call it need.
+      The system spends less on patients who already had less access. Trained on biased data. Designing a sound but unfounded solution.
     </p>
     <div class="citation-footer">
       Obermeyer, Z., Powers, B., Vogeli, C., &amp; Mullainathan, S. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. <em>Science, 366</em>(6464), 447–453.
@@ -1060,7 +1060,8 @@
     <div style="font-size:0.62em; color:var(--muted); max-width:980px; margin-top:0.4em; line-height:1.4;">
       A cost stand-in launders the system's existing inequality into a number that looks neutral.
     </div>
-    <div style="margin-top:18px; max-width:1080px;">
+    <div style="margin-top:18px; max-width:1080px; display: flex; align-items: center; gap: 20px;">
+      <div style="flex: 2;">
       <svg viewBox="0 0 820 360" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
 
         <!-- Title inside SVG, audience-facing -->
@@ -1136,11 +1137,14 @@
         </g>
 
       </svg>
-      <div style="margin-top:14px; max-width:1000px; font-size:0.42em; line-height:1.55; color:var(--ink); background:white; border-left:3px solid var(--teal); padding:12px 16px;">
-        <strong>Risk score</strong> is the algorithm's prediction of who will cost the most. The hospital used it to decide who gets extra care. At the same score, Black patients were actually sicker; the score under-counted their health needs.
-      </div>
       <div style="margin-top:8px; font-size:0.34em; color:var(--soft); max-width:1000px;">
         Data: Obermeyer et al. (2019), Fig. 1A. Curves illustrative; the 4.8 and 3.8 values at the top 3% automatic-referral threshold are exact.
+      </div>
+      </div>
+      <div style="flex: 1;">
+      <div style="font-size:0.42em; line-height:1.55; color:var(--ink); background:white; border-left:3px solid var(--teal); padding:12px 16px;">
+        <strong>Risk score</strong> is the algorithm's prediction of who will cost the most. The hospital used it to decide who gets extra care. At the same score, Black patients were actually sicker; the score under-counted their health needs.
+      </div>
       </div>
     </div>
     <aside class="notes">1.4 · Frame thesis with bias curve.</aside>
@@ -1619,9 +1623,15 @@
         <div class="layer-label">Academic anchor</div>
         <div class="fw-name">Belenguer (2022)</div>
         <div class="fw-tag">Pharma-inspired four-phase pre-flight model</div>
-        <p class="fw-body">
-          Adapts pharmaceutical clinical-trial discipline to AI. <strong>Phase I</strong> closed-environment testing for bias and data quality. <strong>Phase II</strong> secure-open testing via FairTest, AIF360. <strong>Phase III</strong> bias impact assessment against four values (autonomy, harm prevention, fairness, explicability). <strong>Phase IV</strong> monitored release with a compensation scheme when harm occurs. Argues for a transnational independent regulatory body.
-        </p>
+        <div class="fw-body">
+          Clinical Discipline to AI.
+          <ul style="margin:4px 0 0 16px; padding:0;">
+            <li style="margin-bottom:2px;"><strong>Phase 1</strong> - Closed environment testing</li>
+            <li style="margin-bottom:2px;"><strong>Phase 2</strong> - Secure open testing</li>
+            <li style="margin-bottom:2px;"><strong>Phase 3</strong> - Provide the four values (autonomy, prevention, fairness, explicability)</li>
+            <li style="margin-bottom:2px;"><strong>Phase 4</strong> - Planned failure mode</li>
+          </ul>
+        </div>
         <div class="fw-source">Belenguer, L. (2022). AI bias: machine-centric solutions adapted from the pharmaceutical industry. <em>AI and Ethics, 2,</em> 771–787.</div>
       </div>
 
@@ -1629,12 +1639,14 @@
         <div class="layer-label">Legal mandate</div>
         <div class="fw-name">EU AI Act</div>
         <div class="fw-tag">Risk-tiered by deployment context</div>
-        <p class="fw-body">
-          <strong>Article 6 + Annex III</strong> define "high-risk" by deployment context: biometrics, critical infrastructure, employment, essential services, law enforcement, migration, justice. High-risk obligations: third-party conformity, technical documentation, human oversight, post-market monitoring.
-        </p>
-        <p class="fw-body" style="background:#f7e9e5; padding:8px 10px; border-left:2px solid var(--coral); margin-top:8px;">
-          <strong>7 May 2026 Digital Omnibus.</strong> AI tied to machinery and safety products removed from scope entirely. Support systems for HR, education, services narrowed out of high-risk. Annex III deadline pushed to 2 Dec 2027; physical-product timeline to Aug 2028.
-        </p>
+        <div class="fw-body">
+          <ul style="margin:4px 0 0 16px; padding:0;">
+            <li style="margin-bottom:2px;">High Risk Obligation</li>
+            <li style="margin-bottom:2px;">Third party conformity</li>
+            <li style="margin-bottom:2px;">Post market monitoring</li>
+            <li style="margin-bottom:2px;">Critical sectors</li>
+          </ul>
+        </div>
         <div class="fw-source">EU AI Act, Regulation (EU) 2024/1689, Article 6 + Annex III. Digital Omnibus revisions, 7 May 2026.</div>
       </div>
 
@@ -1642,9 +1654,14 @@
         <div class="layer-label">Operational framework</div>
         <div class="fw-name">NIST AI RMF 1.0</div>
         <div class="fw-tag">Lifecycle risk-management functions</div>
-        <p class="fw-body">
-          Four functions across the AI lifecycle: <strong>Govern, Map, Measure, Manage</strong>. Voluntary, technology-neutral, widely adopted as a baseline by US industry. The <strong>Generative AI Profile (NIST-AI-600-1)</strong> extends the framework to GenAI-specific risks. Bridges principles to operational practice on real systems.
-        </p>
+        <div class="fw-body">
+          <ul style="margin:4px 0 0 16px; padding:0;">
+            <li style="margin-bottom:2px;">Managing the governance</li>
+            <li style="margin-bottom:2px;">Environment/map</li>
+            <li style="margin-bottom:2px;">Measuring the model</li>
+            <li style="margin-bottom:2px;">Managing the system</li>
+          </ul>
+        </div>
         <div class="fw-source">NIST. (2023, Jan 26). AI Risk Management Framework 1.0. + NIST-AI-600-1, Generative AI Profile (July 2024).</div>
       </div>
 
