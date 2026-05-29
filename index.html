@@ -574,6 +574,114 @@
     border-radius: 1px;
   }
 
+  /* ───────── principle-weighting card (per-stakeholder, flex column) ───────── */
+  .q1-cols {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    margin-top: 14px;
+    width: 100%;
+  }
+  .q1-col-main {
+    flex: 0 1 580px;
+    min-width: 0;
+  }
+  .pw-card {
+    text-align: left;
+  }
+  .pw-card-flow {
+    flex: 0 0 38%;
+    max-width: 440px;
+    min-width: 0;
+    padding-left: 28px;
+    border-left: 1px solid var(--rule);
+  }
+  .q1-lead {
+    font-size: 0.46em;
+    color: var(--ink);
+    line-height: 1.5;
+    font-weight: 500;
+    margin-bottom: 10px;
+    max-width: 640px;
+  }
+  .biomarker-bullets { margin-top: 0 !important; }
+  .biomarker-bullets li .bm-arrow { color: var(--coral); font-weight: 700; }
+  .q1-source {
+    font-size: 0.3em;
+    color: var(--soft);
+    line-height: 1.4;
+    margin-top: 10px;
+    max-width: 640px;
+  }
+  .pw-head {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--soft);
+    font-weight: 700;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pw-row { margin-bottom: 12px; }
+  .pw-row:last-of-type { margin-bottom: 4px; }
+  .pw-line1 {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .pw-name { font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .pw-name.primary   { font-size: 16px; }
+  .pw-name.secondary { font-size: 12.5px; color: var(--muted); }
+  .pw-art {
+    font-size: 8.5px;
+    color: var(--soft);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .pw-role {
+    display: inline-block;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    line-height: 1.3;
+    white-space: nowrap;
+    margin-bottom: 4px;
+  }
+  .pw-role.drove    { background: #E24B4A; color: #fff; }
+  .pw-role.carried  { background: #F7C1C1; color: #501313; }
+  .pw-role.bore     { background: #fff; color: #791F1F; border: 1.5px solid #E24B4A; }
+  .pw-role.enforced { background: #0d7377; color: #fff; }
+  .pw-ctx {
+    font-size: 10.5px;
+    color: var(--ink);
+    line-height: 1.45;
+    font-weight: 500;
+  }
+  .pw-judgment {
+    font-size: 8.5px;
+    color: var(--soft);
+    font-style: italic;
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+  .pw-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+  .pw-legend .pw-role { font-size: 8px; margin-bottom: 0; }
+
   .reveal .slides section ul.slide-bullets,
   .slide-bullets {
     list-style: none !important;
@@ -1164,46 +1272,19 @@
     <div class="stakeholder-num">Stakeholder 1 of 10 · the origin node</div>
     <h1 class="stakeholder-title">Vendor data scientists</h1>
     <div class="stakeholder-sub" style="font-size:0.7em; margin-bottom:10px;">Built the model right. Picked the outcome wrong.</div>
-    <div class="heat-map-wrap" style="margin:6px 0 14px 0;"><div id="hm-1" class="heat-map-svg" style="max-width:600px;"></div></div>
-    <div style="font-size:0.52em; color:var(--ink); margin:6px 0 12px; max-width:1040px; line-height:1.5;">
-      Cost was used as a stand-in for health. But health is biomarkers, not dollars.
-    </div>
-    <table style="border-collapse:collapse; width:100%; max-width:1060px; margin-left:0; margin-right:auto; font-size:0.4em; line-height:1.4;">
-      <thead>
-        <tr style="border-bottom:2px solid var(--teal);">
-          <th style="text-align:left; padding:5px 8px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; font-weight:700;">Health marker</th>
-          <th style="text-align:left; padding:5px 8px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; font-weight:700;">Gap at the same risk score</th>
-          <th style="text-align:left; padding:5px 8px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; font-weight:700;">What it means</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="border-bottom:1px solid var(--rule-2);">
-          <td style="padding:5px 8px;"><strong>HbA1c</strong> (blood sugar)</td>
-          <td style="padding:5px 8px; color:var(--coral); font-weight:600;">Black patients +0.6 pts</td>
-          <td style="padding:5px 8px;">about 30% higher all-cause mortality</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--rule-2);">
-          <td style="padding:5px 8px;"><strong>Systolic BP</strong> (blood pressure)</td>
-          <td style="padding:5px 8px; color:var(--coral); font-weight:600;">Black patients +5.7 mmHg</td>
-          <td style="padding:5px 8px;">about 7.6% higher all-cause mortality</td>
-        </tr>
-        <tr style="border-bottom:1px solid var(--rule-2);">
-          <td style="padding:5px 8px;"><strong>Creatinine</strong> (kidney)</td>
-          <td style="padding:5px 8px; color:var(--coral); font-weight:600;">worse for Black patients</td>
-          <td style="padding:5px 8px;">higher reading means worse kidney function</td>
-        </tr>
-        <tr>
-          <td style="padding:5px 8px;"><strong>Hematocrit</strong> (anemia)</td>
-          <td style="padding:5px 8px; color:var(--coral); font-weight:600;">worse for Black patients</td>
-          <td style="padding:5px 8px;">lower reading means more anemia</td>
-        </tr>
-      </tbody>
-    </table>
-    <div style="margin-top:12px; font-size:0.48em; color:var(--ink); font-weight:500; max-width:1060px; line-height:1.5;">
-      Same score. Worse health. The model measured cost, and the system spent less on Black patients because it always had.
-    </div>
-    <div style="margin-top:6px; font-size:0.3em; color:var(--soft); max-width:1060px; line-height:1.4;">
-      Gaps at matched risk score: Obermeyer et al. (2019), p. 449 (HbA1c, systolic BP). Creatinine and hematocrit: direction from Fig. 2D and 2E; exact matched-score values not reported in the paper.
+    <div class="heat-map-wrap" style="margin:6px 0 12px 0;"><div id="hm-1" class="heat-map-svg" style="max-width:560px;"></div></div>
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <div class="q1-lead">Cost was the stand-in for health. But health is biomarkers, not dollars. Same score, worse health:</div>
+        <ul class="slide-bullets biomarker-bullets">
+          <li><strong>Blood sugar</strong> &nbsp;+0.6 pts in Black patients&nbsp; <span class="bm-arrow">&rarr;</span> &nbsp;~30% higher all-cause mortality</li>
+          <li><strong>Blood pressure</strong> &nbsp;+5.7 mmHg in Black patients&nbsp; <span class="bm-arrow">&rarr;</span> &nbsp;~7.6% higher all-cause mortality</li>
+          <li><strong>Kidney</strong> (creatinine) &nbsp;worse in Black patients&nbsp; <span class="bm-arrow">&rarr;</span> &nbsp;worse kidney function</li>
+          <li><strong>Anemia</strong> (hematocrit) &nbsp;worse in Black patients&nbsp; <span class="bm-arrow">&rarr;</span> &nbsp;more anemia</li>
+        </ul>
+        <div class="q1-source">Matched-score gaps: Obermeyer et al. (2019), p. 449 (blood sugar, blood pressure). Kidney and anemia: direction from Fig. 2D, 2E; matched-score values not reported.</div>
+      </div>
+      <div id="pw-1" class="pw-card pw-card-flow"></div>
     </div>
     <div class="slide-footer">Q1.1</div>
     <aside class="notes">Q1.1 · Vendor data scientists. ~30s.</aside>
@@ -1215,12 +1296,17 @@
     <h1 class="stakeholder-title">The vendor</h1>
     <div class="stakeholder-sub">Anonymous in paper. Named the next day by reporting.</div>
     <div class="heat-map-wrap"><div id="hm-2" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>Optum / Impact Pro (UnitedHealth subsidiary)</li>
       <li>Reached ~200M Americans before audit</li>
       <li>Replicated bias on 3.7M patients</li>
       <li>Co-developed the 84% fix under pressure</li>
     </ul>
+      </div>
+      <div id="pw-2" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.2</div>
     <aside class="notes">Q1.2 · The vendor. Reporting-sourced. ~35s.</aside>
   </section>
@@ -1231,11 +1317,16 @@
     <h1 class="stakeholder-title">Insurance and payers</h1>
     <div class="stakeholder-sub">The training signal was already racially skewed.</div>
     <div class="heat-map-wrap"><div id="hm-3" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>Claims approved on cost criteria</li>
       <li>Skewed approval became training signal</li>
       <li>Bias inherited, not invented</li>
     </ul>
+      </div>
+      <div id="pw-3" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.3</div>
     <aside class="notes">Q1.3 · Insurance and payers. ~25s.</aside>
   </section>
@@ -1246,12 +1337,17 @@
     <h1 class="stakeholder-title">Hospital executives</h1>
     <div class="stakeholder-sub">Bought without asking what they were buying.</div>
     <div class="heat-map-wrap"><div id="hm-4" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>Procured to control cost</li>
       <li>Never asked for explainability</li>
       <li>Never asked about societal impact</li>
       <li>Liability for design they didn't make</li>
     </ul>
+      </div>
+      <div id="pw-4" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.4</div>
     <aside class="notes">Q1.4 · Hospital executives. ~30s.</aside>
   </section>
@@ -1262,12 +1358,17 @@
     <h1 class="stakeholder-title">Treating physicians</h1>
     <div class="stakeholder-sub">A score, not the biomarkers. No second look.</div>
     <div class="heat-map-wrap"><div id="hm-5" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>Saw score, not biomarkers</li>
       <li>No second look with context</li>
       <li>Override redressed small fraction</li>
       <li>Anchored on the score, not the patient</li>
     </ul>
+      </div>
+      <div id="pw-5" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.5</div>
     <aside class="notes">Q1.5 · Treating physicians. ~30s.</aside>
   </section>
@@ -1278,12 +1379,17 @@
     <h1 class="stakeholder-title">Black patients</h1>
     <div class="stakeholder-sub">Sicker at every risk score. Invisible to themselves.</div>
     <div class="heat-map-wrap"><div id="hm-6" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>4.8 vs 3.8 conditions in the top 3%</li>
       <li>26.3% gap in chronic illness</li>
       <li>HbA1c +0.6%, BP +5.7 mmHg</li>
       <li>Harm invisible to those harmed</li>
     </ul>
+      </div>
+      <div id="pw-6" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.6</div>
     <aside class="notes">Q1.6 · Black patients. Analytical centre. ~50s. Slow delivery; biomarker numbers as evidence.</aside>
   </section>
@@ -1294,12 +1400,17 @@
     <h1 class="stakeholder-title">Families and caregivers</h1>
     <div class="stakeholder-sub">The unpaid ledger.</div>
     <div class="heat-map-wrap"><div id="hm-7" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>Absorb the unpaid care</li>
       <li>Visible on no balance sheet</li>
       <li>Carry the shadow cost</li>
       <li>No AI law names them as a stakeholder</li>
     </ul>
+      </div>
+      <div id="pw-7" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.7</div>
     <aside class="notes">Q1.7 · Families and caregivers. Shadow cost · P8. ~20s.</aside>
   </section>
@@ -1311,13 +1422,18 @@
     <div class="stakeholder-sub">Accountability was forced from outside.</div>
     <div class="q1-climax-rule"></div>
     <div class="heat-map-wrap"><div id="hm-8" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>Rare full input-output access</li>
       <li>Algorithm ran years in production before audit</li>
       <li>New York Dept of Financial Services + Dept of Health · stop or justify</li>
       <li>Optum named the day after publication</li>
       <li>Confirmed bias, co-developed 84% fix</li>
     </ul>
+      </div>
+      <div id="pw-8" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.8</div>
     <aside class="notes">Q1.8 · Auditors + regulators. Climax · zoom lands hardest here. ~75s.</aside>
   </section>
@@ -1329,12 +1445,17 @@
     <h1 class="stakeholder-title">UnitedHealth Group</h1>
     <div class="stakeholder-sub">Owned the tool via Optum. Took the regulatory hit.</div>
     <div class="heat-map-wrap"><div id="hm-9" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>Parent of Optum, owner of the algorithm</li>
       <li>Years of deployment before any external audit</li>
       <li>New York Dept of Financial Services letter went to the UnitedHealth CEO</li>
       <li>Confirmed bias and co-developed the fix</li>
     </ul>
+      </div>
+      <div id="pw-9" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.9</div>
     <aside class="notes">Q1.9 UnitedHealth Group.</aside>
   </section>
@@ -1345,12 +1466,17 @@
     <h1 class="stakeholder-title">Other health systems and patients</h1>
     <div class="stakeholder-sub">~200M Americans on similar tools. Obermeyer is one case.</div>
     <div class="heat-map-wrap"><div id="hm-10" class="heat-map-svg"></div></div>
-    <ul class="slide-bullets">
+    <div class="q1-cols">
+      <div class="q1-col-main">
+        <ul class="slide-bullets">
       <li>~200M Americans subject to similar tools</li>
       <li>Industry-wide adoption, no industry-wide audit</li>
       <li>The architecture is everywhere, not just this case</li>
       <li>Risk multiplies across vendors and systems</li>
     </ul>
+      </div>
+      <div id="pw-10" class="pw-card pw-card-flow"></div>
+    </div>
     <div class="slide-footer">Q1.10</div>
     <aside class="notes">Q1.10 systemic scope.</aside>
   </section>
@@ -1982,6 +2108,140 @@
 
   renderHeatMaps();
   Reveal.on('ready', renderHeatMaps);
+
+  // ──────────────────────────────────────────────────────────
+  // Principle-weighting card (per-stakeholder, lower-right)
+  // Pulls the 2-4 firing principles out of the heat map, ranks
+  // them, and tags each with a causal role: drove / carried /
+  // bore / enforced. Context line = why this node is in that
+  // principle's domain. Role calls are G's analyst judgment;
+  // contestable ones carry an italic judgment note.
+  // ──────────────────────────────────────────────────────────
+  const PW_DATA = {
+    'pw-1': {
+      head: 'Principles most implicated',
+      rows: [
+        { name: 'Validity & Robustness', rank: 'primary',   art: 'EU AI Act Art. 15', role: 'drove',
+          ctx: 'Chose predicted cost as the stand-in for health. The label was invalid at the source: sicker patients scored the same.' },
+        { name: 'Fairness & Equity', rank: 'secondary', art: 'AIDA', role: 'drove',
+          ctx: 'The invalid target produced the racial gap as a direct output.' }
+      ]
+    },
+    'pw-2': {
+      head: 'Principles most implicated',
+      rows: [
+        { name: 'Accountability', rank: 'primary',   art: 'AIDA', role: 'drove',
+          ctx: 'Sold an unaudited tool reaching ~200M patients; replicated the bias on 3.7M of its own before fixing it.' },
+        { name: 'Privacy (corporate shield)', rank: 'secondary', art: 'extended reading', role: 'drove',
+          ctx: 'Used entity-level privacy as a shield: proprietary closed source, anonymity requested even at disclosure.' }
+      ],
+      judgment: 'Corporate-privacy lens is an analytical extension; AIDA Privacy governs personal data.'
+    },
+    'pw-3': {
+      head: 'Principles most implicated',
+      rows: [
+        { name: 'Fairness & Equity', rank: 'primary',   art: 'AIDA', role: 'carried',
+          ctx: 'Cost-based claims approval was already racially skewed. That skew became the training signal the model learned.' }
+      ],
+      judgment: 'Carrier, not originator: passed an existing systemic bias into the data.'
+    },
+    'pw-4': {
+      head: 'Principles most implicated',
+      rows: [
+        { name: 'Accountability', rank: 'primary',   art: 'AIDA', role: 'drove',
+          ctx: 'Abdicated the procurement-stage duty to demand an explanation for a tool rationing health services. Negligence, not innocence.' },
+        { name: 'Transparency', rank: 'secondary', art: 'AIDA', role: 'drove',
+          ctx: 'Accepted a closed box without asking how it scored cost. Finance would never deploy an unexplained model.' }
+      ],
+      judgment: 'My assessment: this was a governance failure at procurement, not passive inheritance.'
+    },
+    'pw-5': {
+      head: 'Principles most implicated',
+      rows: [
+        { name: 'Human Oversight', rank: 'primary',   art: 'EU AI Act Art. 14', role: 'carried',
+          ctx: 'Saw a score, not the biomarkers. Override redressed only a small fraction. Oversight existed on paper, failed in practice.' },
+        { name: 'Transparency', rank: 'secondary', art: 'AIDA', role: 'carried',
+          ctx: 'No explanation behind the score to act on; anchored to the number, passed it to the patient.' }
+      ]
+    },
+    'pw-6': {
+      head: 'Principles most implicated',
+      rows: [
+        { name: 'Fairness & Equity', rank: 'primary',   art: 'AIDA', role: 'bore',
+          ctx: 'Sicker at every risk score: 4.8 vs 3.8 conditions at the cutoff, a 26% gap. Under-referred by more than half.' },
+        { name: 'Validity & Robustness', rank: 'secondary', art: 'EU AI Act Art. 15', role: 'bore',
+          ctx: 'The invalid target landed on them specifically; they had no agency over the score that decided their care.' }
+      ]
+    },
+    'pw-7': {
+      head: 'Principles most implicated',
+      rows: [
+        { name: 'Environmental & societal wellbeing', rank: 'primary',   art: 'EU-added', role: 'bore',
+          ctx: 'The tool silently transferred care onto unpaid families. Whose purpose does it serve? Plausible downstream stress and illness, on no balance sheet, named by no AI law.' }
+      ]
+    },
+    'pw-8': {
+      head: 'Principles most implicated · forced from outside',
+      rows: [
+        { name: 'Transparency', rank: 'primary',   art: 'AIDA', role: 'enforced',
+          ctx: 'NY Department of Financial Services + Department of Health forced disclosure of a live proprietary model. The transparency principle failing and being repaired in one move.' },
+        { name: 'Accountability', rank: 'secondary', art: 'AIDA', role: 'enforced',
+          ctx: 'Stop or justify. External accountability, reluctant, years after deployment.' }
+      ],
+      judgment: 'VERIFY before camera: the two named NY agencies.'
+    },
+    'pw-9': {
+      head: 'Principles most implicated',
+      rows: [
+        { name: 'Accountability', rank: 'primary',   art: 'AIDA', role: 'drove',
+          ctx: 'Parent of Optum, owner of the algorithm. Ran it for years; fixed it only once public. The DFS letter went to the CEO.' },
+        { name: 'Privacy (corporate shield)', rank: 'secondary', art: 'extended reading', role: 'drove',
+          ctx: 'Corporate apex of the closed-source posture that delayed accountability.' }
+      ],
+      judgment: 'Corporate-privacy lens is an analytical extension; AIDA Privacy governs personal data.'
+    },
+    'pw-10': {
+      head: 'Principles most implicated · latent',
+      rows: [
+        { name: 'Safety', rank: 'primary',   art: 'AIDA', role: 'bore',
+          ctx: 'The architecture is everywhere: ~200M Americans under similar tools, no industry-wide audit. Systemic, un-surfaced exposure.' },
+        { name: 'Validity & Robustness', rank: 'secondary', art: 'EU AI Act Art. 15', role: 'bore',
+          ctx: 'Same invalid-target failure mode, un-audited at scale across vendors.' }
+      ]
+    }
+  };
+
+  const ROLE_LABEL = { drove: 'Drove', carried: 'Carried', bore: 'Bore', enforced: 'Enforced' };
+
+  function makePrincipleCard(data) {
+    let html = `<div class="pw-head">${data.head}</div>`;
+    for (const r of data.rows) {
+      html += `<div class="pw-row">`;
+      html += `<div class="pw-line1">`;
+      html += `<span class="pw-name ${r.rank}">${r.name}</span>`;
+      html += `<span class="pw-art">${r.art}</span>`;
+      html += `</div>`;
+      html += `<div style="margin:3px 0 4px;"><span class="pw-role ${r.role}">${ROLE_LABEL[r.role]}</span></div>`;
+      html += `<div class="pw-ctx">${r.ctx}</div>`;
+      html += `</div>`;
+    }
+    if (data.judgment) {
+      html += `<div class="pw-judgment">${data.judgment}</div>`;
+    }
+    return html;
+  }
+
+  function renderPrincipleCards() {
+    for (const [id, data] of Object.entries(PW_DATA)) {
+      const el = document.getElementById(id);
+      if (el && !el.hasChildNodes()) {
+        el.innerHTML = makePrincipleCard(data);
+      }
+    }
+  }
+
+  renderPrincipleCards();
+  Reveal.on('ready', renderPrincipleCards);
 
   // ──────────────────────────────────────────────────────────
   // Timer plugin (v4): start + pause + resume; per-slide
